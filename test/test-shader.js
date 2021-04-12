@@ -5,6 +5,7 @@
  */
 
 global.THREE = require('three')
+var path = require('path')
 var quote = require('sun-tzu-quotes')
 var createOrbitViewer = require('three-orbit-viewer')(THREE)
 var createBackground = require('three-vignette-background')
@@ -37,8 +38,8 @@ function start (font, texture) {
   // geom.setAttribute('line', new Float32Array(lineData));
 
   var material = new THREE.RawShaderMaterial({
-    vertexShader: glslify(__dirname + '/shaders/fx.vert'),
-    fragmentShader: glslify(__dirname + '/shaders/fx.frag'),
+    vertexShader: glslify(path.join(__dirname, '/shaders/fx.vert')),
+    fragmentShader: glslify(path.join(__dirname, '/shaders/fx.frag')),
     uniforms: {
       animate: { type: 'f', value: 1 },
       iGlobalTime: { type: 'f', value: 0 },
@@ -99,13 +100,13 @@ function start (font, texture) {
       // map to 0..1 for attribute
       var t = lineCount <= 1 ? 1 : (line / (lineCount - 1))
       // quad - 4 verts
-      return [ t, t, t, t ]
+      return [t, t, t, t]
     }).reduce(function (a, b) {
       return a.concat(b)
     }, [])
 
     // update the "line" vertex attribute
-    geom.setAttribute('line', new THREE.BufferAttribute(new Float32Array(lineData), 1));
+    geom.setAttribute('line', new THREE.BufferAttribute(new Float32Array(lineData), 1))
 
     // center the text
     var layout = geom.layout
