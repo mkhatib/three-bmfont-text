@@ -122,7 +122,7 @@ var _getTextGeometryClass = function () {
   }
 
 
-  _TEXT_GEOMETRY_CLASS_DEF = TextGeometry;
+  return _TEXT_GEOMETRY_CLASS_DEF = TextGeometry;
 }
 
 module.exports = function createTextGeometry(opt) {
